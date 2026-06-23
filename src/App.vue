@@ -14,11 +14,27 @@ onMounted(() => {
     })
   })
 })
+
+const initializeThirdPartyLibrary = (el) => {
+  console.log(el)
+}
 </script>
 
 <template>
+  <input
+    :ref="
+      (el) => {
+        initializeThirdPartyLibrary(el)
+      }
+    "
+  />
   <ul>
-    <li v-for="(item, index) in list" :key="index" ref="itemRefs" style="opacity: 0">
+    <li
+      v-for="(item, index) in list"
+      :key="index"
+      :ref="(el) => (itemRefs[index] = el)"
+      style="opacity: 0"
+    >
       {{ item }}
     </li>
   </ul>
