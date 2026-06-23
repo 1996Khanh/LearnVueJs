@@ -18,17 +18,17 @@ const secondOption = ref('second option')
   <input type="checkbox" id="single-checkbox" v-model="checked" true-value="yes" false-value="no" />
 
   <p>Multiple checkbox: {{ checkedNames }}</p>
-  <input type="checkbox" id="checkbox-a" v-model="checkedNames" value="A" />
+  <input type="checkbox" id="checkbox-a" v-model="checkedNames" :value="firstOption" />
   <label for="checkbox-a">A</label>
-  <input type="checkbox" id="checkbox-b" v-model="checkedNames" value="B" />
+  <input type="checkbox" id="checkbox-b" v-model="checkedNames" :value="secondOption" />
   <label for="checkbox-b">B</label>
-  <input type="checkbox" id="checkbox-c" v-model="checkedNames" value="C" />
+  <input type="checkbox" id="checkbox-c" v-model="checkedNames" :value="thirdOption" />
   <label for="checkbox-c">C</label>
 
   <p>Radio: {{ radioChecked }}</p>
-  <input type="radio" id="radio-a" v-model="radioChecked" value="A" />
+  <input type="radio" id="radio-a" v-model="radioChecked" :value="firstOption" />
   <label for="a">A</label>
-  <input type="radio" id="radio-b" v-model="radioChecked" value="B" />
+  <input type="radio" id="radio-b" v-model="radioChecked" :value="secondOption" />
   <label for="b">B</label>
 
   <p>Select: {{ selected }}</p>
