@@ -19,4 +19,12 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(intervalId.value)
 })
+
+onBeforeMount(() => {
+  console.log('onBeforeMount')
+})
+
+onBeforeUnmount(() => {
+  console.log('onBeforeUnmount')
+})
 </script>
