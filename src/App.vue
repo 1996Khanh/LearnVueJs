@@ -1,30 +1,40 @@
+<script setup>
+import { ref, watch } from 'vue'
+
+const question = ref('')
+const isLoading = ref(false)
+const answer = ref('')
+// const count = ref(0)
+
+// const increaseCount = () => {
+//   count.value++
+// }
+
+// watch(count, (newVal, oldVal) => {
+//   console.log(`newVal: ${newVal}, oldVal: ${oldVal}`)
+// })
+watch(question, async (newQuestion) => {
+  if (newQuestion.includes('?')) {
+    isLoading.value = true
+    answer.value = 'Đang suy nghĩ...'
+    try {
+      const response = await fetch('https://yesno.wtf/api')
+      answer.value = (await response.json()).answer
+    } catch (error) {
+      answer.value = 'Error! Không thể call api'
+    } finally {
+      isLoading.value = false
+    }
+  }
+})
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <!-- <p>{{ count }}</p>
+  <button @click="count++">Increase</button> -->
+
+  <div>
+    <input v-model="question" :disabled="isLoading" />
+    <p>{{ answer }}</p>
+  </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
