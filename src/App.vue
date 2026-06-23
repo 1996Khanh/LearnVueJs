@@ -1,23 +1,41 @@
-<!-- <script setup>
-import { ref } from 'vue'
-const text = ref('')
-
-const handleInput = (event) => {
-  text.value = event.target.value
-}
-</script>
-
-<template>
-  <p>{{ text }}</p>
-  <input :value="text" @input="handleInput" placeholder="Nhập tên của bạn" />
-</template> -->
-
 <script setup>
 import { ref } from 'vue'
-const text = ref('')
+
+const checked = ref('no')
+
+const checkedNames = ref([])
+
+const radioChecked = ref()
+
+const selected = ref('')
+
+const firstOption = ref('first option')
+const secondOption = ref('second option')
 </script>
 
 <template>
-  <p>{{ text }}</p>
-  <input v-model="text" placeholder="Nhập tên của bạn" />
+  <p>Checkbox: {{ checked }}</p>
+  <input type="checkbox" id="single-checkbox" v-model="checked" true-value="yes" false-value="no" />
+
+  <p>Multiple checkbox: {{ checkedNames }}</p>
+  <input type="checkbox" id="checkbox-a" v-model="checkedNames" value="A" />
+  <label for="checkbox-a">A</label>
+  <input type="checkbox" id="checkbox-b" v-model="checkedNames" value="B" />
+  <label for="checkbox-b">B</label>
+  <input type="checkbox" id="checkbox-c" v-model="checkedNames" value="C" />
+  <label for="checkbox-c">C</label>
+
+  <p>Radio: {{ radioChecked }}</p>
+  <input type="radio" id="radio-a" v-model="radioChecked" value="A" />
+  <label for="a">A</label>
+  <input type="radio" id="radio-b" v-model="radioChecked" value="B" />
+  <label for="b">B</label>
+
+  <p>Select: {{ selected }}</p>
+  <select v-model="selected">
+    <option disabled value="">Please select one</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
 </template>
