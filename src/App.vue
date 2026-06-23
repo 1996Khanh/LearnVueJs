@@ -1,28 +1,45 @@
 <script setup>
-import { ref, reactive } from 'vue'
-const color = ref('red')
-const background = ref('blue')
-const fontSize = ref(30)
+import { ref } from 'vue'
 
-const styleObject = reactive({
-  border: 'none',
-  borderRadius: '6px',
-})
+const isLoggedIn = ref(false)
+
+const toggleLogin = () => {
+  isLoggedIn.value = !isLoggedIn.value
+}
+
+const userStatus = ref('online')
+
+const changeStatus = () => {
+  if (userStatus.value === 'online') {
+    userStatus.value = 'away'
+  } else if (userStatus.value === 'away') {
+    userStatus.value = 'busy'
+  } else if (userStatus.value === 'busy') {
+    userStatus.value = 'online'
+  }
+}
+
+const isVisible = ref(false)
+
+const toggleShow = () => {
+  isVisible.value = !isVisible.value
+}
 </script>
 
 <template>
   <div>
-    <button
-      :style="[
-        {
-          color,
-          background,
-          fontSize: fontSize + 'px',
-        },
-        styleObject,
-      ]"
-    >
-      Button
-    </button>
+    <h1 v-if="isLoggedIn">Chào mừng người dùng đã đăng nhập</h1>
+    <h1 v-else>Chào mừng khách</h1>
+    <button @click="toggleLogin">{{ isLoggedIn ? 'Đăng xuất' : 'Đăng nhập' }}</button>
+
+    <br />
+    <h1 v-if="userStatus === 'online'">Người dùng đang online</h1>
+    <h1 v-else-if="userStatus === 'away'">Người dùng đang vắng mặt</h1>
+    <h1 v-else-if="userStatus === 'busy'">Người dùng đang bận</h1>
+    <button @click="changeStatus">Thay đổi trạng thái</button>
+
+    <br />
+    <h1 v-show="isVisible">Nội dung này ẩn hoặc hiển thị</h1>
+    <button @click="toggleShow">{{ isVisible ? 'Ẩn' : 'Hiện' }}</button>
   </div>
 </template>
