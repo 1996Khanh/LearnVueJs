@@ -1,54 +1,28 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+const color = ref('red')
+const background = ref('blue')
+const fontSize = ref(30)
 
-const isActive = ref(true)
-const hasError = ref(true)
-
-const changeActive = () => {
-  isActive.value = !isActive.value
-}
-
-const changeHasError = () => {
-  hasError.value = !hasError.value
-}
+const styleObject = reactive({
+  border: 'none',
+  borderRadius: '6px',
+})
 </script>
 
 <template>
-  <button @click="changeActive" class="button" :class="{ active: isActive }">
-    {{ isActive ? 'Active' : 'Deactive' }}
-  </button>
-
-  <button @click="changeHasError" class="button" :class="{ 'has-error': hasError }">
-    {{ hasError ? 'Has Error' : 'No Error' }}
-  </button>
+  <div>
+    <button
+      :style="[
+        {
+          color,
+          background,
+          fontSize: fontSize + 'px',
+        },
+        styleObject,
+      ]"
+    >
+      Button
+    </button>
+  </div>
 </template>
-
-<style>
-.button {
-  border: none;
-  background: #ede9fe;
-  color: #8b5cf6;
-  padding: 10px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  &:hover {
-    background: #c7d2fe;
-  }
-}
-
-.active {
-  background: #8b5cf6;
-  color: white;
-  &:hover {
-    background: #818cf8;
-  }
-}
-
-.has-error {
-  background: #ef4444;
-  color: #fee2e2;
-  &:hover {
-    background: #f87171;
-  }
-}
-</style>
