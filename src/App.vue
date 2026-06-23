@@ -1,20 +1,35 @@
 <script setup>
-import { nextTick, ref } from 'vue'
+import { reactive, computed, ref } from 'vue'
+
+const book = reactive({
+  name: 'Book 1',
+  chapters: [],
+})
+
+const isPublished = computed(() => {
+  console.log('function chạy')
+  return book.chapters.length > 0 ? 'Có' : 'Không'
+})
+
+// const isPublished = () => {
+//   console.log('function chạy')
+//   return book.chapters.length > 0 ? 'Có' : 'Không'
+// }
+
+const addChapter = () => {
+  book.chapters.push('Chapter')
+}
 
 const count = ref(0)
-
-const increase = async () => {
-  count.value++
-  // console.log(document.getElementById('count').innerText)
-
-  await nextTick()
-  console.log(document.getElementById('count').innerText)
-}
 </script>
 
 <template>
   <div>
-    <p id="count">Count: {{ count }}</p>
-    <button @click="increase">Increase</button>
+    <p>Book name: {{ book.name }}</p>
+    <p>Đã xuất bản: {{ isPublished }}</p>
+    <button @click="addChapter">Add chapter</button>
+
+    <p>{{ count }}</p>
+    <button @click="count++">Click random</button>
   </div>
 </template>
