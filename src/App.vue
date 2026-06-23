@@ -1,30 +1,21 @@
 <script setup>
-const message = 'Hello world'
+const num = 2
 
-const rawHtml = '<div><h1>Title</h1><span style="color: red">This should be red.</span></div>'
+const isButtonDisabled = false
 
-const buttonId = 'btnId'
-const buttonClass = 'btnClass'
-const isDisabled = false
+const listString = 'a,b,c,d,e,f,g,h,i,j'
 
-const objectOfAttrs = {
-  id: 'container',
-  class: 'wrapper',
-  style: {
-    color: 'blue',
-  },
-}
+const convertToId = (data) => data.split(',').reverse().join('-')
 </script>
 
 <template>
-  <h1>Syntax</h1>
-  <p>Message: {{ message }}</p>
-
-  <span v-html="rawHtml"></span>
-
-  <button v-bind:id="buttonId">Click</button>
+  <button>{{ num * 2 }}</button>
   <br />
-  <button :id="buttonId" :class="buttonClass" :disabled="isDisabled">Click</button>
   <br />
-  <button v-bind="objectOfAttrs">Click here!!!</button>
+  <button :disabled="isButtonDisabled">
+    {{ isButtonDisabled ? 'Disabled' : 'Click here' }}
+  </button>
+  <br />
+  <br />
+  <button :id="convertToId(listString)">click here 2</button>
 </template>
