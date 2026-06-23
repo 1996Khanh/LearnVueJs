@@ -1,14 +1,25 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
-const name = ref('')
-const inputRef = ref(null)
+const list = ref(['Item 1', 'Item 2', 'Item 3'])
+const itemRefs = ref([])
 
 onMounted(() => {
-  inputRef.value.focus()
+  nextTick(() => {
+    itemRefs.value.forEach((item) => {
+      item.style.transition = 'opacity 5s'
+      requestAnimationFrame(() => {
+        item.style.opacity = '1'
+      })
+    })
+  })
 })
 </script>
 
 <template>
-  <input type="text" v-model="name" ref="inputRef" />
+  <ul>
+    <li v-for="(item, index) in list" :key="index" ref="itemRefs" style="opacity: 0">
+      {{ item }}
+    </li>
+  </ul>
 </template>
