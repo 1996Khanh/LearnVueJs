@@ -1,15 +1,14 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const x = ref(0)
-const y = ref(0)
+const name = ref('')
+const inputRef = ref(null)
 
-watchEffect(() => {
-  console.log(`x=${x.value}, y=${y.value}, tổng=${x.value + y.value}`)
+onMounted(() => {
+  inputRef.value.focus()
 })
 </script>
 
 <template>
-  <button @click="x++">x++</button>
-  <button @click="y++">y++</button>
+  <input type="text" v-model="name" ref="inputRef" />
 </template>
