@@ -1,21 +1,12 @@
 <script setup>
-const num = 2
+import { ref } from 'vue'
 
-const isButtonDisabled = false
+const count = ref(0)
 
-const listString = 'a,b,c,d,e,f,g,h,i,j'
-
-const convertToId = (data) => data.split(',').reverse().join('-')
+const increase = () => count.value++
 </script>
 
 <template>
-  <button>{{ num * 2 }}</button>
-  <br />
-  <br />
-  <button :disabled="isButtonDisabled">
-    {{ isButtonDisabled ? 'Disabled' : 'Click here' }}
-  </button>
-  <br />
-  <br />
-  <button :id="convertToId(listString)">click here 2</button>
+  <p>{{ count }}</p>
+  <button @click="increase">Increase</button>
 </template>
