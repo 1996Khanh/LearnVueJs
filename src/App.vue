@@ -1,12 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-const count = ref(0)
+const object = reactive({
+  count: 2,
+  user: {
+    age: 18,
+  },
+  array: [1, 2, 3],
+})
 
-const increase = () => count.value++
+const change = () => {
+  object.count++
+  object.user.age++
+  object.array.push(0)
+}
 </script>
 
 <template>
-  <p>{{ count }}</p>
-  <button @click="increase">Increase</button>
+  <p>{{ object.count }}</p>
+  <p>{{ object.user.age }}</p>
+  <p>{{ object.array }}</p>
+  <button @click="change">Change</button>
 </template>
