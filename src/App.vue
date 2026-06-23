@@ -1,35 +1,28 @@
 <script setup>
-import { reactive, computed, ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const book = reactive({
-  name: 'Book 1',
-  chapters: [],
+const firstName = ref('Nguyên Văn')
+const lastName = ref('A')
+
+const fullName = computed({
+  get() {
+    return firstName.value + ' ' + lastName.value
+  },
+  set(newValue) {
+    ;[firstName.value, lastName.value] = newValue.split(',')
+  },
 })
 
-const isPublished = computed(() => {
-  console.log('function chạy')
-  return book.chapters.length > 0 ? 'Có' : 'Không'
-})
-
-// const isPublished = () => {
-//   console.log('function chạy')
-//   return book.chapters.length > 0 ? 'Có' : 'Không'
-// }
-
-const addChapter = () => {
-  book.chapters.push('Chapter')
+const changeFullname = () => {
+  fullName.value = 'Nguyễn Văn,B'
 }
-
-const count = ref(0)
 </script>
 
 <template>
   <div>
-    <p>Book name: {{ book.name }}</p>
-    <p>Đã xuất bản: {{ isPublished }}</p>
-    <button @click="addChapter">Add chapter</button>
-
-    <p>{{ count }}</p>
-    <button @click="count++">Click random</button>
+    <p id="count">Fullname: {{ fullName }}</p>
+    <p id="count">First name: {{ firstName }}</p>
+    <p id="count">Last name: {{ lastName }}</p>
+    <button @click="changeFullname">Change fullname</button>
   </div>
 </template>
