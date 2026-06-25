@@ -1,9 +1,17 @@
 <template>
-  <button @click="count++">{{ count }}</button>
+  <button @click="emit('increase')">Increase</button>
+  <button @click="callFunctionIncreaseByTwoTimes">Increase by two times</button>
+  <button @click="callFunctionIncreaseBy(10, 10)">Increase by</button>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+const emit = defineEmits(['increase', 'increase-by-two-times', 'increase-by'])
 
-const count = ref(0)
+const callFunctionIncreaseByTwoTimes = () => {
+  emit('increase-by-two-times')
+}
+
+const callFunctionIncreaseBy = (number1, number2) => {
+  emit('increase-by', number1, number2)
+}
 </script>
