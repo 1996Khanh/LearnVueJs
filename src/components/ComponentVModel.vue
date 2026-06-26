@@ -1,24 +1,22 @@
 <template>
   <div>
-    <!-- input email + username ở đây -->
-    <input type="text" v-model="email" />
-    <p>{{ email }}</p>
-
     <input type="text" v-model="username" />
     <p>{{ username }}</p>
 
-    <!-- <button @click="setEmailDefault">Set email default</button> -->
-    <!-- <button @click="setUsernameDefault">Set username default</button> -->
+    <button @click="setUsernameDefault">Set username default</button>
   </div>
 </template>
 
 <script setup>
-const email = defineModel()
-const username = defineModel('username')
-
-const setEmailDefault = () => {
-  email.value = 'thaycacac.official@gmail.com'
-}
+const [username, modifiers] = defineModel('username', {
+  set(value) {
+    if (modifiers.capitalize && value) {
+      // chỉ chữ đầu hoa, phần còn lại giữ nguyên
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+    return value
+  },
+})
 
 const setUsernameDefault = () => {
   username.value = 'thaycacac'
